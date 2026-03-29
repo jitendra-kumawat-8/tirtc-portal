@@ -1,0 +1,61 @@
+{
+  "name": "tirtc-portal",
+  "version": "1.0.0",
+  "description": "TIRTC candidate and employer portal built from the boiler-next starter",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\""
+  },
+  "dependencies": {
+    "@emotion/react": "11.11.3",
+    "@emotion/styled": "^11.14.0",
+    "@hookform/resolvers": "^5.2.2",
+    "@mui/icons-material": "5.17.1",
+    "@mui/material": "5.17.1",
+    "@mui/system": "5.17.1",
+    "@mui/x-data-grid": "5.17.0",
+    "@mui/x-date-pickers": "5.0.0-alpha.6",
+    "@tanstack/react-query": "^5.74.4",
+    "axios": "^1.8.4",
+    "classnames": "^2.5.1",
+    "dayjs": "^1.11.13",
+    "next": "^15.1.3",
+    "notistack": "^3.0.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.56.0",
+    "react-quill": "^2.0.0",
+    "react-slick": "^0.31.0",
+    "react-virtuoso": "^4.18.3",
+    "slick-carousel": "^1.8.1",
+    "yup": "^1.7.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.14.1",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/react-slick": "^0.23.13",
+    "autoprefixer": "^10.4.21",
+    "eslint": "9.25.1",
+    "eslint-config-next": "^15.1.3",
+    "postcss": "^8.5.3",
+    "prettier": "^3.4.2",
+    "tailwindcss": "3",
+    "typescript": "5.8.3"
+  },
+  "keywords": [
+    "tirtc",
+    "nextjs",
+    "portal",
+    "training",
+    "mui"
+  ],
+  "author": "",
+  "license": "MIT"
+}

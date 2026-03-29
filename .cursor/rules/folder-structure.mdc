@@ -1,0 +1,87 @@
+---
+description: TIRTC feature-based folder structure for pages and sections
+globs: **/*.tsx, **/*.ts
+alwaysApply: true
+---
+
+# Folder Structure
+
+## Feature-based architecture
+
+```
+features/
+  HomePage/
+    index.tsx            ← orchestrator: state, Head, layout shell, section composition
+    types.ts             ← shared types (InterestForm, etc.)
+    sections/
+      Navbar/
+        index.tsx
+        constants.ts     ← navItems[]
+      Hero/
+        index.tsx
+        constants.ts     ← heroStats[]
+      Partners/
+        index.tsx
+        constants.ts     ← partners[]
+      About/
+        index.tsx
+        constants.ts     ← aboutPoints[], featureCards[]
+      ProblemSolution/
+        index.tsx        ← inline constants OK (small, not reused)
+      Courses/
+        index.tsx
+        constants.ts     ← courseCategories[], programmeApproach[]
+      HowItWorks/
+        index.tsx
+        constants.ts     ← steps[]
+      IndustryModel/
+        index.tsx
+        constants.ts     ← modelPoints[], frameworkItems[], deliveryEcosystem[]
+      Leadership/
+        index.tsx
+        constants.ts     ← leadership[]
+      CTASection/
+        index.tsx
+      Contact/
+        index.tsx
+      Footer/
+        index.tsx
+      InterestDialog/
+        index.tsx        ← MUI Dialog + form inputs
+
+pages/
+  index.tsx              ← thin wrapper: imports and renders <HomePage />
+```
+
+## Rules
+
+- `pages/index.tsx` only imports and renders `<HomePage />` — no logic, no state
+- All page-level state lives in `features/HomePage/index.tsx`
+- Constants (static data arrays) always go in `constants.ts` next to the component
+- Types shared across sections go in `features/HomePage/types.ts`
+- Inline constants are OK only when: ≤ 3 items AND not reused elsewhere
+- MUI icon imports belong in `constants.ts` when used as data (Icon components in arrays)
+
+## Props pattern — pass handlers, not state
+
+```tsx
+// ✅ Pass handlers as props
+<Navbar scrollToSection={scrollToSection} />
+<Hero onShowInterest={() => setInterestOpen(true)} />
+<CTASection scrollToSection={scrollToSection} />
+```
+
+## New pages follow the same pattern
+
+```
+features/
+  SomePage/
+    index.tsx
+    types.ts
+    sections/
+      SectionName/
+        index.tsx
+        constants.ts
+pages/
+  some-page.tsx   ← just renders <SomePage />
+```

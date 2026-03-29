@@ -1,0 +1,66 @@
+---
+description: TIRTC project color palette — Tailwind tokens and hex values
+globs: **/*.tsx, **/*.ts, **/*.css
+alwaysApply: true
+---
+
+# TIRTC Color Palette
+
+## Tailwind Tokens (use these in className)
+
+### Primary (Blue)
+| Token | Hex | Use |
+|---|---|---|
+| `primary-900` | `#1E3A8A` | Deep navy — headings, dark surfaces |
+| `primary-700` | `#1D4ED8` | Main blue — buttons, links, icons |
+| `primary-500` | `#3B82F6` | Hover / lighter accents |
+
+### Secondary (Orange)
+| Token | Hex | Use |
+|---|---|---|
+| `secondary-600` | `#EA580C` | CTA hover |
+| `secondary-500` | `#F97316` | Primary CTA buttons |
+| `secondary-400` | `#FB923C` | Lighter accents |
+
+### Accent (Cyan)
+| Token | Hex | Use |
+|---|---|---|
+| `accent-500` | `#06B6D4` | Step numbers, tech vibe, ecosystem cards |
+| `accent-400` | `#22D3EE` | Lighter cyan |
+
+### Backgrounds
+| Token | Hex | Use |
+|---|---|---|
+| `bg-background-primary` | `#FFFFFF` | Main page, cards |
+| `bg-background-secondary` | `#F8FAFC` | Alternate sections |
+| `bg-background-muted` | `#F1F5F9` | Cards, muted blocks |
+
+### Text / Content
+| Token | Hex | Use |
+|---|---|---|
+| `text-content-primary` | `#0F172A` | Main text (almost black) |
+| `text-content-secondary` | `#475569` | Paragraph text |
+| `text-content-muted` | `#94A3B8` | Labels, captions |
+
+## Section Alternation Pattern
+```
+Hero         → gradient (#1D4ED8 → #0891B2)
+Partners     → bg-background-secondary
+About        → bg-background-primary
+Problem/Sol  → bg-background-muted
+Courses      → bg-background-primary
+How It Works → bg-background-secondary
+Model        → bg-background-primary
+Leadership   → bg-background-muted
+CTA          → bg-background-primary
+Contact      → bg-background-muted
+Footer       → bg-content-primary (#0F172A)
+```
+
+## MUI Theme Mapping
+`theme.ts` palette:
+- `primary.main` = `#1D4ED8`, `primary.dark` = `#1E3A8A`, `primary.light` = `#3B82F6`
+- `secondary.main` = `#F97316`, `secondary.dark` = `#EA580C`, `secondary.light` = `#FB923C`
+- `accent.main` = `#06B6D4`
+- `text.primary` = `#0F172A`, `text.secondary` = `#475569`, `text.disabled` = `#94A3B8`
+- `background.paper` = `#FFFFFF`, `background.default` = `#F8FAFC`

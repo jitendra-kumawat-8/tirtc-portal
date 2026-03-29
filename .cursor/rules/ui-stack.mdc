@@ -1,0 +1,52 @@
+---
+description: UI stack conventions — Tailwind-first layout, MUI for forms/chips only
+globs: **/*.tsx, **/*.ts
+alwaysApply: true
+---
+
+# UI Stack Conventions
+
+## Layout & Styling → Tailwind Only
+Use Tailwind utility classes for ALL layout, spacing, typography, and color.
+Never use MUI layout components: `Box`, `Stack`, `Grid`, `Container`, `Paper`, `Card`, `CardContent`, `Typography`, `Divider`, `AppBar`, `Toolbar`, `Drawer`.
+
+```tsx
+// ❌ BAD
+<Stack spacing={3}><Box sx={{ mt: 2 }}>...</Box></Stack>
+
+// ✅ GOOD
+<div className="flex flex-col gap-6"><div>...</div></div>
+```
+
+## MUI Allowed Components
+Only use MUI for interactive form/feedback components:
+- `TextField`, `Select`, `Autocomplete` — form inputs
+- `Button` — inside forms/dialogs only
+- `Dialog`, `DialogTitle`, `DialogContent`, `DialogActions`
+- `Chip` — tags, badges, labels
+- `Snackbar` / `useSnackbar` from notistack
+
+## Spacing Rule: Gap Over Margin
+**Never** apply `margin` or `padding` to child components.
+Use `gap-*` on flex/grid parents. Apply `py-*/px-*` only on the section/container itself.
+
+```tsx
+// ❌ BAD — padding/margin on children
+<div><p className="mt-4">text</p><p className="mt-2">text</p></div>
+
+// ✅ GOOD — gap on parent
+<div className="flex flex-col gap-4"><p>text</p><p>text</p></div>
+```
+
+## Section Wrapper Pattern
+```tsx
+<section className="bg-background-secondary py-20 md:py-28">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col gap-10">
+    {/* content */}
+  </div>
+</section>
+```
+
+## Animations
+Define keyframes in `<style jsx global>` or `globals.css`.
+Apply via className strings (`.hero-title`, `.hero-badge`, etc.).
