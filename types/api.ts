@@ -63,9 +63,13 @@ export interface UserProfile {
   countryOfCitizenship?: string;
   haveWorkPermit?: string;
   haveValidPassport?: string;
+  validityOfPassport?: string;
   highestQualificationCategory?: string;
   highestQualificationSubCategory?: string;
   otherHighestQualification?: string;
+  resume?: string;
+  certificateList?: string[];
+  documentAttachList?: string[];
   isAcceptPrivacy?: boolean;
   isAcceptMarketingCommunication?: boolean;
   isProfileUpdate?: boolean;
@@ -165,7 +169,8 @@ export interface UpdateProfileRequest {
   countryOfCitizenship?: string;
   haveWorkPermit?: string;
   haveValidPassport?: string;
-  documentAttach?: File | null;
+  validityOfPassport?: string;
+  documentsAttach?: File | null;
   highestQualificationCategory?: string;
   highestQualificationSubCategory?: string;
   otherHighestQualification?: string;
@@ -176,3 +181,61 @@ export interface UpdateProfileRequest {
 }
 
 export interface UpdateProfileResponse extends ApiEnvelope {}
+
+export interface OptionItem {
+  value: string;
+  text: string;
+}
+
+export interface CountryData {
+  countryId: string;
+  countryName: string;
+  isoCode: string;
+}
+
+export interface StateData {
+  stateId: string;
+  stateName: string;
+}
+
+export interface CityData {
+  cityId: string;
+  cityName: string;
+}
+
+export interface CountryListResponse extends ApiEnvelope {
+  data: CountryData[];
+}
+
+export interface StateListResponse extends ApiEnvelope {
+  data: StateData[];
+}
+
+export interface CityListResponse extends ApiEnvelope {
+  data: CityData[];
+}
+
+export interface JobRoleListResponse extends ApiEnvelope {
+  data: OptionItem[];
+}
+
+export interface JobSkillListResponse extends ApiEnvelope {
+  data: OptionItem[];
+}
+
+export interface LicenseTypeListResponse extends ApiEnvelope {
+  data: OptionItem[];
+}
+
+export interface CountryOfCitizenshipListResponse extends ApiEnvelope {
+  data: OptionItem[];
+}
+
+export interface HighestQualificationCategoryListResponse extends ApiEnvelope {
+  data: OptionItem[];
+}
+
+export interface HighestQualificationSubCategoryListResponse
+  extends ApiEnvelope {
+  data: OptionItem[];
+}

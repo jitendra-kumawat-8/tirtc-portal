@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 const quickLinks = [
-  { label: "Registration – Candidate", href: "/register" },
-  { label: "Registration – Employer", href: "/employer-login" },
-  { label: "Training Details", href: "/courses" },
+  { label: "Register as Candidate", href: "/register" },
+  { label: "Employer Login", href: "/employer-login" },
+  { label: "Training Programmes", href: "/courses" },
 ];
 
 const socialLinks = [
@@ -62,90 +62,51 @@ export default function Footer() {
       className="scroll-mt-24"
       style={{ background: "linear-gradient(135deg, #0F172A 0%, #1E293B 100%)" }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-20 pt-14 pb-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-20 py-10 flex flex-col gap-8 md:items-start items-center">
 
-        {/* Main 3-column grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-16 pb-8 border-b" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
+        {/* Top row — logos + columns */}
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
 
-          {/* Col 1 — Identity */}
-          <div className="flex flex-col gap-5">
-            <div className="flex items-center gap-4">
-              <Image
-                src="/logo/CII White.png"
-                alt="CII"
-                width={80}
-                height={32}
-                style={{ objectFit: "contain" }}
-              />
-              <div className="w-px h-7" style={{ background: "rgba(255,255,255,0.18)" }} />
-              <Image
-                src="/logo/TIRTC LOGOS.png"
-                alt="TIRTC"
-                width={90}
-                height={36}
-                style={{ objectFit: "contain" }}
-              />
+          {/* Identity */}
+          <div className="flex flex-col gap-4 lg:max-w-xs">
+            <div className="flex items-center gap-3">
+              <Image src="/logo/CII White.png" alt="CII" width={72} height={28} style={{ objectFit: "contain" }} />
+              <div className="w-px h-6" style={{ background: "rgba(255,255,255,0.18)" }} />
+              <Image src="/logo/TIRTC LOGOS.png" alt="TIRTC" width={80} height={32} style={{ objectFit: "contain" }} />
             </div>
-            <div className="flex flex-col gap-1.5">
-              <p className="text-sm font-semibold" style={{ color: "rgba(255,255,255,0.9)" }}>
-                Telecom Innovation, Research &amp; Training Centre (TIRTC)
-              </p>
-              <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
-                BRBRAITT Campus, South Civil Lines,<br />
-                Lekha Nagar, Jabalpur, Madhya Pradesh 482001
-              </p>
-            </div>
-            <div className="flex flex-col gap-1">
-              <span className="text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>
-                Anchored by{" "}
-                <span style={{ color: "rgba(255,255,255,0.78)" }}>Confederation of Indian Industry</span>
-              </span>
-              <span className="text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>
-                In collaboration with{" "}
-                <span style={{ color: "rgba(255,255,255,0.78)" }}>Department of Telecommunications</span>
-              </span>
-            </div>
+            <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.45)" }}>
+              BRBRAITT Campus, South Civil Lines,<br />
+              Jabalpur, Madhya Pradesh 482001
+            </p>
           </div>
 
-          {/* Col 2 — Quick Links */}
-          <div className="flex flex-col gap-5">
-            <span className="text-xs font-bold uppercase tracking-[0.14em]" style={{ color: "rgba(255,255,255,0.45)" }}>
-              Quick Links
-            </span>
-            <ul className="flex flex-col gap-3">
-              {quickLinks.map(({ label, href }) => (
-                <li key={label}>
-                  <Link
-                    href={href}
-                    className="text-sm btn-transition hover:underline underline-offset-4"
-                    style={{ color: "rgba(255,255,255,0.72)" }}
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Col 3 — Contact + Social */}
-          <div className="flex flex-col gap-5">
-            <span className="text-xs font-bold uppercase tracking-[0.14em]" style={{ color: "rgba(255,255,255,0.45)" }}>
-              Contact Us
-            </span>
-            <div className="flex flex-col gap-2">
-              <span className="text-sm" style={{ color: "rgba(255,255,255,0.72)" }}>
-                Email: <span style={{ color: "rgba(255,255,255,0.45)" }}>—</span>
+          <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-8">
+            {/* Quick Links */}
+            <div className="flex flex-col gap-4">
+              <span className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "rgba(255,255,255,0.35)" }}>
+                Quick Links
               </span>
-              <span className="text-sm" style={{ color: "rgba(255,255,255,0.72)" }}>
-                Phone: <span style={{ color: "rgba(255,255,255,0.45)" }}>—</span>
-              </span>
+              <ul className="flex flex-col gap-2.5">
+                {quickLinks.map(({ label, href }) => (
+                  <li key={label}>
+                    <Link
+                      href={href}
+                      className="text-sm btn-transition hover:underline underline-offset-4"
+                      style={{ color: "rgba(255,255,255,0.65)" }}
+                    >
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            <div className="flex flex-col gap-3">
-              <span className="text-xs font-bold uppercase tracking-[0.14em]" style={{ color: "rgba(255,255,255,0.45)" }}>
-                Connect with Us
+            {/* Social */}
+            <div className="flex flex-col gap-4">
+              <span className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "rgba(255,255,255,0.35)" }}>
+                Follow Us
               </span>
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-2">
                 {socialLinks.map(({ label, href, icon }) => (
                   <a
                     key={label}
@@ -155,17 +116,17 @@ export default function Footer() {
                     aria-label={label}
                     className="btn-transition flex items-center justify-center w-8 h-8 rounded-full"
                     style={{
-                      background: "rgba(255,255,255,0.08)",
-                      color: "rgba(255,255,255,0.6)",
+                      background: "rgba(255,255,255,0.07)",
+                      color: "rgba(255,255,255,0.55)",
                       border: "1px solid rgba(255,255,255,0.1)",
                     }}
                     onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.18)";
+                      (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.16)";
                       (e.currentTarget as HTMLElement).style.color = "white";
                     }}
                     onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.08)";
-                      (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.6)";
+                      (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.07)";
+                      (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.55)";
                     }}
                   >
                     {icon}
@@ -174,15 +135,17 @@ export default function Footer() {
               </div>
             </div>
           </div>
-
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-4 flex flex-col sm:flex-row gap-1.5 sm:items-center sm:justify-between">
-          <span className="text-xs" style={{ color: "rgba(255,255,255,0.3)" }}>
+        <div
+          className="pt-6 flex flex-col sm:flex-row gap-1.5 sm:items-center sm:justify-between border-t"
+          style={{ borderColor: "rgba(255,255,255,0.07)" }}
+        >
+          <span className="text-xs" style={{ color: "rgba(255,255,255,0.28)" }}>
             &copy; {new Date().getFullYear()} TIRTC. All rights reserved.
           </span>
-          <span className="text-xs" style={{ color: "rgba(255,255,255,0.3)" }}>
+          <span className="text-xs" style={{ color: "rgba(255,255,255,0.28)" }}>
             Powered by CII Skill Development &amp; Livelihood
           </span>
         </div>

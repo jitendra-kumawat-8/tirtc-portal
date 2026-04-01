@@ -3,7 +3,6 @@ import { Controller, useFormContext } from "react-hook-form";
 import { FormLabel } from "@mui/material";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import classNames from "classnames";
-import { fileToBase64 } from "./fileToBase64";
 
 interface HFDocumentUploadProps {
   name: string;
@@ -11,6 +10,8 @@ interface HFDocumentUploadProps {
   labelVariant?: "small" | "medium";
   rules?: object;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  accept?: string;
+  existingDocument?: string;
 }
 
 const HFDocumentUpload: React.FC<HFDocumentUploadProps> = ({
@@ -19,10 +20,20 @@ const HFDocumentUpload: React.FC<HFDocumentUploadProps> = ({
   labelVariant = "small",
   rules = {},
   onChange,
+  accept,
+  existingDocument,
 }) => {
   const { control } = useFormContext();
 
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
+  const [hasExistingDocument, setHasExistingDocument] = useState(
+    !!existingDocument
+  );
+
+  const existingDocumentLabel = existingDocument
+    ? existingDocument.split("/").pop() || "Uploaded file"
+    : "";
+
   return (
     <Controller
       name={name}
@@ -53,24 +64,25 @@ const HFDocumentUpload: React.FC<HFDocumentUploadProps> = ({
               onChange={(e) => {
                 const file = e.target.files?.[0];
                 if (file) {
-                  fileToBase64(file).then((base64) => {
-                    field.onChange(base64);
-                    setSelectedFile(file.name);
-                  });
+                  field.onChange(file);
+                  setSelectedFile(file.name);
                 }
                 onChange?.(e);
               }}
               className="hidden"
+              accept={accept}
             />
             <AttachFileIcon className="text-primary-500" fontSize="small" />
             <span className="text-gray-400 font-inter">Attach</span>
           </label>
 
           {/* Show selected file name and remove button */}
-          {selectedFile && (
-            <div className="flex items-center gap-2 mt-2">
-              <span className="text-xs text-[#374151] font-inter">
-                File selected {selectedFile}
+          {(hasExistingDocument || selectedFile) && (
+            <div className="mt-2 flex flex-col items-start gap-1 min-w-0">
+              <span className="text-xs text-[#374151] font-inter break-all">
+                {selectedFile
+                  ? `File selected: ${selectedFile}`
+                  : `Existing document: ${existingDocumentLabel}`}
               </span>
               <button
                 type="button"
@@ -78,6 +90,7 @@ const HFDocumentUpload: React.FC<HFDocumentUploadProps> = ({
                 onClick={() => {
                   field.onChange(null);
                   setSelectedFile(null);
+                  setHasExistingDocument(false);
                 }}
               >
                 Remove

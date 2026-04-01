@@ -61,39 +61,103 @@ export const programmeApproach = [
 
 export const jobCards = [
   {
-    title: "5G Field Operations Engineer",
-    meta: "Jabalpur · Full-time",
+    title: "Telecom Network Support Engineer",
     highlights: [
-      "Site surveys, installation & commissioning support",
-      "RF basics, safety compliance, and handover documentation",
-      "Works with OEM / operator field workflows",
+      "Monitor network performance",
+      "Troubleshoot basic connectivity issues",
+      "Assist in maintaining telecom infrastructure",
     ],
-    outcome: "Early-career engineers ready for rollout and maintenance teams.",
     accent: "#1D4ED8",
     hoverGradient: "linear-gradient(135deg, #1D4ED8 0%, #1E40AF 100%)",
   },
   {
-    title: "NOC / Network Operations Associate",
-    meta: "Hybrid · Full-time",
+    title: "RF Engineer – Trainee",
     highlights: [
-      "L1 monitoring, ticketing, and escalation playbooks",
-      "Fault isolation on transport, IP, and access networks",
-      "Shift-ready operations with clear runbooks",
+      "Work on mobile network signals",
+      "Analyze coverage and signal strength",
+      "Assist in network optimization",
     ],
-    outcome: "Deployable talent for 24×7 network assurance desks.",
+    accent: "#2563EB",
+    hoverGradient: "linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%)",
+  },
+  {
+    title: "NOC Engineer",
+    highlights: [
+      "Monitor telecom networks 24/7",
+      "Identify outages / issues",
+      "Escalate technical problems",
+    ],
     accent: "#1E40AF",
     hoverGradient: "linear-gradient(135deg, #1E40AF 0%, #1E3A8A 100%)",
   },
   {
-    title: "Fibre & Access Network Technician",
-    meta: "Field · Contract-to-hire",
+    title: "Telecom Technician / Field Engineer",
     highlights: [
-      "Splicing, testing, and last-mile fibre readiness",
-      "Customer premises equipment and basic troubleshooting",
-      "Quality checks aligned to operator SOPs",
+      "Install telecom equipment",
+      "Support site operations",
+      "Handle basic troubleshooting",
     ],
-    outcome: "Hands-on technicians for FTTH and enterprise access rollouts.",
+    accent: "#0891B2",
+    hoverGradient: "linear-gradient(135deg, #0891B2 0%, #0E7490 100%)",
+  },
+  {
+    title: "Core Network Engineer – Junior",
+    highlights: [
+      "Work on switching, routing, and core systems",
+      "Handle network traffic and data flow",
+      "Support backend telecom operations",
+    ],
+    accent: "#1E3A8A",
+    hoverGradient: "linear-gradient(135deg, #1E3A8A 0%, #1E40AF 100%)",
+  },
+  {
+    title: "Transmission / Transport Engineer",
+    highlights: [
+      "Manage fiber networks & data transmission",
+      "Ensure network reliability",
+      "Work with SDH, MPLS, IP networks",
+    ],
+    accent: "#1D4ED8",
+    hoverGradient: "linear-gradient(135deg, #1D4ED8 0%, #0891B2 100%)",
+  },
+  {
+    title: "Telecom Operations Engineer",
+    highlights: [
+      "Oversee network performance",
+      "Coordinate between RAN & core teams",
+      "Optimize telecom services",
+    ],
     accent: "#2563EB",
-    hoverGradient: "linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%)",
+    hoverGradient: "linear-gradient(135deg, #2563EB 0%, #1E40AF 100%)",
+  },
+  {
+    title: "Telecom Protocol / Call Flow Engineer",
+    highlights: [
+      "Analyze call flows (voice/data sessions)",
+      "Troubleshoot signaling issues",
+      "Work with LTE/5G protocols",
+    ],
+    accent: "#0E7490",
+    hoverGradient: "linear-gradient(135deg, #0E7490 0%, #0891B2 100%)",
+  },
+  {
+    title: "5G / Telecom Innovation Engineer",
+    highlights: [
+      "Work on next-gen networks (5G)",
+      "Assist in deployment & testing",
+      "Optimize network performance",
+    ],
+    accent: "#06B6D4",
+    hoverGradient: "linear-gradient(135deg, #06B6D4 0%, #0891B2 100%)",
+  },
+  {
+    title: "Telecom Solutions Engineer",
+    highlights: [
+      "Design telecom solutions for clients",
+      "Work on integration across systems",
+      "Support pre-sales or technical consulting",
+    ],
+    accent: "#1D4ED8",
+    hoverGradient: "linear-gradient(135deg, #1D4ED8 0%, #2563EB 100%)",
   },
 ] as const;

@@ -16,7 +16,7 @@ function PrevArrow({ onClick }: { onClick?: () => void }) {
   return (
     <button
       onClick={onClick}
-      className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center btn-transition absolute -left-5 top-1/2 -translate-y-1/2 z-10"
+      className="slick-custom-arrow flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center btn-transition absolute -left-5 top-1/2 -translate-y-1/2 z-10"
       style={{ border: "1.5px solid rgba(29,78,216,0.2)", color: "#1D4ED8", background: "white", boxShadow: "0 2px 8px rgba(0,0,0,0.08)" }}
       aria-label="Previous"
     >
@@ -29,7 +29,7 @@ function NextArrow({ onClick }: { onClick?: () => void }) {
   return (
     <button
       onClick={onClick}
-      className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center btn-transition absolute -right-5 top-1/2 -translate-y-1/2 z-10"
+      className="slick-custom-arrow flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center btn-transition absolute -right-5 top-1/2 -translate-y-1/2 z-10"
       style={{ border: "1.5px solid rgba(29,78,216,0.2)", color: "#1D4ED8", background: "white", boxShadow: "0 2px 8px rgba(0,0,0,0.08)" }}
       aria-label="Next"
     >
@@ -83,8 +83,23 @@ const sliderSettings = {
   nextArrow: <NextArrow />,
   dotsClass: "slick-dots tirtc-dots",
   responsive: [
-    { breakpoint: 1024, settings: { slidesToShow: 2 } },
-    { breakpoint: 640, settings: { slidesToShow: 1 } },
+    { breakpoint: 1024, settings: { slidesToShow: 2, arrows: true } },
+    { breakpoint: 640, settings: { slidesToShow: 1, arrows: false } },
+  ],
+};
+
+const jobSliderSettings = {
+  dots: true,
+  infinite: true,
+  speed: 400,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  prevArrow: <PrevArrow />,
+  nextArrow: <NextArrow />,
+  dotsClass: "slick-dots tirtc-dots",
+  responsive: [
+    { breakpoint: 1024, settings: { slidesToShow: 2, arrows: true } },
+    { breakpoint: 640, settings: { slidesToShow: 1, arrows: false } },
   ],
 };
 
@@ -232,7 +247,7 @@ export default function Courses() {
             </Link>
           </div>
 
-          <div className="relative px-6">
+          <div className="relative sm:px-6">
             <style>{`
               .tirtc-dots { margin-top: 20px !important; }
               .tirtc-dots li button:before {
@@ -242,6 +257,9 @@ export default function Courses() {
               }
               .tirtc-dots li.slick-active button:before {
                 color: #1D4ED8 !important;
+              }
+              @media (max-width: 639px) {
+                .slick-custom-arrow { display: none !important; }
               }
             `}</style>
 
@@ -318,107 +336,75 @@ export default function Courses() {
               details for quick scanning alongside training programmes.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {jobCards.map((job) => (
-              <div
-                id={makeInterestId("job", job.title)}
-                key={job.title}
-                className="job-card rounded-2xl p-6 flex flex-col gap-6 cursor-default group"
-                style={{
-                  background: "white",
-                  border: `1.5px solid ${job.accent}25`,
-                  boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
-                  transition: "all 0.3s ease",
-                }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget;
-                  el.style.background = job.hoverGradient;
-                  el.style.borderColor = "transparent";
-                  el.style.boxShadow = "0 12px 32px rgba(0,0,0,0.15)";
-                  el.querySelectorAll<HTMLElement>(".jc-title").forEach((n) => { n.style.color = "white"; });
-                  el.querySelectorAll<HTMLElement>(".jc-text").forEach((n) => { n.style.color = "rgba(255,255,255,0.85)"; });
-                  el.querySelectorAll<HTMLElement>(".jc-icon").forEach((n) => { n.style.color = "rgba(255,255,255,0.7)"; });
-                  el.querySelectorAll<HTMLElement>(".jc-chip").forEach((n) => { n.style.borderColor = "rgba(255,255,255,0.3)"; n.style.color = "white"; });
-                  el.querySelectorAll<HTMLElement>(".jc-label").forEach((n) => { n.style.color = "rgba(255,255,255,0.6)"; });
-                  el.querySelectorAll<HTMLElement>(".jc-divider").forEach((n) => { n.style.borderColor = "rgba(255,255,255,0.15)"; });
-                  el.querySelectorAll<HTMLElement>(".jc-cta").forEach((n) => {
-                    n.style.borderColor = "rgba(255,255,255,0.45)";
-                    n.style.color = "white";
-                    n.style.background = "rgba(255,255,255,0.12)";
-                  });
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget;
-                  el.style.background = "white";
-                  el.style.borderColor = `${job.accent}25`;
-                  el.style.boxShadow = "0 2px 12px rgba(0,0,0,0.06)";
-                  el.querySelectorAll<HTMLElement>(".jc-title").forEach((n) => { n.style.color = job.accent; });
-                  el.querySelectorAll<HTMLElement>(".jc-text").forEach((n) => { n.style.color = "#475569"; });
-                  el.querySelectorAll<HTMLElement>(".jc-icon").forEach((n) => { n.style.color = job.accent; });
-                  el.querySelectorAll<HTMLElement>(".jc-chip").forEach((n) => { n.style.borderColor = `${job.accent}33`; n.style.color = job.accent; });
-                  el.querySelectorAll<HTMLElement>(".jc-label").forEach((n) => { n.style.color = job.accent; });
-                  el.querySelectorAll<HTMLElement>(".jc-divider").forEach((n) => { n.style.borderColor = ""; });
-                  el.querySelectorAll<HTMLElement>(".jc-cta").forEach((n) => {
-                    n.style.borderColor = `${job.accent}40`;
-                    n.style.color = job.accent;
-                    n.style.background = "transparent";
-                  });
-                }}
-              >
-                <div className="flex flex-col gap-4">
-                  <h3
-                    className="jc-title text-lg font-bold font-poppins"
-                    style={{ color: job.accent, transition: "color 0.3s ease" }}
-                  >
-                    {job.title}
-                  </h3>
-                  <Chip
-                    className="jc-chip"
-                    label={job.meta}
-                    size="small"
-                    variant="outlined"
-                    sx={{
-                      alignSelf: "flex-start",
-                      borderColor: `${job.accent}33`,
-                      color: job.accent,
-                      fontWeight: 600,
-                      fontSize: "0.7rem",
-                      textTransform: "none",
-                      letterSpacing: "0.04em",
+          <div className="relative sm:px-6">
+            <Slider {...jobSliderSettings}>
+              {jobCards.map((job) => (
+                <div key={job.title} className="px-2.5 pb-8">
+                  <div
+                    id={makeInterestId("job", job.title)}
+                    className="job-card rounded-2xl p-6 flex flex-col gap-5 cursor-default h-full"
+                    style={{
+                      background: "white",
+                      border: `1.5px solid ${job.accent}25`,
+                      boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
                       transition: "all 0.3s ease",
+                      minHeight: 340,
                     }}
-                  />
-                </div>
-                <ul className="flex flex-col gap-2">
-                  {job.highlights.map((line) => (
-                    <li key={line} className="flex items-start gap-2.5">
-                      <CheckCircleOutlineRounded
-                        className="jc-icon flex-shrink-0 mt-0.5"
-                        style={{ fontSize: 16, color: job.accent, transition: "color 0.3s ease" }}
-                      />
-                      <span className="jc-text text-sm" style={{ color: "#475569", transition: "color 0.3s ease" }}>
-                        {line}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-                <div
-                  className="jc-divider border-t border-black/[0.06] pt-4 flex flex-col gap-1 mt-auto"
-                  style={{ transition: "border-color 0.3s ease" }}
-                >
-                  <span
-                    className="jc-label text-[11px] font-bold uppercase tracking-[0.1em]"
-                    style={{ color: job.accent, transition: "color 0.3s ease" }}
+                    onMouseEnter={(e) => {
+                      const el = e.currentTarget;
+                      el.style.background = job.hoverGradient;
+                      el.style.borderColor = "transparent";
+                      el.style.boxShadow = "0 12px 32px rgba(0,0,0,0.15)";
+                      el.querySelectorAll<HTMLElement>(".jc-title").forEach((n) => { n.style.color = "white"; });
+                      el.querySelectorAll<HTMLElement>(".jc-text").forEach((n) => { n.style.color = "rgba(255,255,255,0.85)"; });
+                      el.querySelectorAll<HTMLElement>(".jc-icon").forEach((n) => { n.style.color = "rgba(255,255,255,0.7)"; });
+                      el.querySelectorAll<HTMLElement>(".jc-cta").forEach((n) => {
+                        n.style.borderColor = "rgba(255,255,255,0.45)";
+                        n.style.color = "white";
+                        n.style.background = "rgba(255,255,255,0.12)";
+                      });
+                    }}
+                    onMouseLeave={(e) => {
+                      const el = e.currentTarget;
+                      el.style.background = "white";
+                      el.style.borderColor = `${job.accent}25`;
+                      el.style.boxShadow = "0 2px 12px rgba(0,0,0,0.06)";
+                      el.querySelectorAll<HTMLElement>(".jc-title").forEach((n) => { n.style.color = job.accent; });
+                      el.querySelectorAll<HTMLElement>(".jc-text").forEach((n) => { n.style.color = "#475569"; });
+                      el.querySelectorAll<HTMLElement>(".jc-icon").forEach((n) => { n.style.color = job.accent; });
+                      el.querySelectorAll<HTMLElement>(".jc-cta").forEach((n) => {
+                        n.style.borderColor = `${job.accent}40`;
+                        n.style.color = job.accent;
+                        n.style.background = "transparent";
+                      });
+                    }}
                   >
-                    Fit
-                  </span>
-                  <p className="jc-text text-sm" style={{ color: "#475569", transition: "color 0.3s ease" }}>
-                    {job.outcome}
-                  </p>
+                    <h3
+                      className="jc-title text-base font-bold font-poppins leading-snug"
+                      style={{ color: job.accent, transition: "color 0.3s ease" }}
+                    >
+                      {job.title}
+                    </h3>
+
+                    <ul className="flex flex-col gap-2 flex-1">
+                      {job.highlights.map((line) => (
+                        <li key={line} className="flex items-start gap-2.5">
+                          <CheckCircleOutlineRounded
+                            className="jc-icon flex-shrink-0 mt-0.5"
+                            style={{ fontSize: 15, color: job.accent, transition: "color 0.3s ease" }}
+                          />
+                          <span className="jc-text text-xs leading-relaxed" style={{ color: "#475569", transition: "color 0.3s ease" }}>
+                            {line}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <JobInterestButton jobTitle={job.title} accent={job.accent} />
+                  </div>
                 </div>
-                <JobInterestButton jobTitle={job.title} accent={job.accent} />
-              </div>
-            ))}
+              ))}
+            </Slider>
           </div>
         </div>
 

@@ -228,27 +228,64 @@ export function InterestFlowProvider({
       const res = await updateProfile({
         userId: uid,
         fullName: values.fullName.trim(),
-        email: values.email.trim(),
-        contactNumber: values.contactNumber.trim(),
-        workStatus: values.workStatus || undefined,
-        nationality: values.nationality?.trim() || undefined,
         dateOfBirth: values.dateOfBirth
           ? dayjs(values.dateOfBirth).format("YYYY-MM-DD")
           : undefined,
-        gender: values.gender || undefined,
-        linkedInProfile: values.linkedInProfile?.trim() || undefined,
+        contactNumber: values.contactNumber.trim(),
+        email: values.email.trim(),
+        nationality: values.nationality?.trim() || undefined,
         address: values.address?.trim() || undefined,
         country: values.country || undefined,
         state: values.state || undefined,
         district: values.district || undefined,
         pincode: values.pincode?.trim() || undefined,
+        gender: values.gender || undefined,
+        aadharCardNo: values.aadharCardNo?.trim() || undefined,
+        fatherName: values.fatherName?.trim() || undefined,
+        sourceOfCandidate: values.sourceOfCandidate || undefined,
+        workStatus: values.workStatus.length
+          ? values.workStatus.join(",")
+          : undefined,
+        linkedInProfile: values.linkedInProfile?.trim() || undefined,
+        totalExperienceYears: values.totalExperienceYears || undefined,
+        totalExperienceMonths: values.totalExperienceMonths || undefined,
+        currentAddress: values.currentAddress || undefined,
+        currentSalary: values.currentSalary?.trim() || undefined,
         keySkillsList: values.keySkillsList.length
           ? JSON.stringify(values.keySkillsList)
           : undefined,
-        highestEducation: values.highestEducation || undefined,
+        nameOfCollege: values.nameOfCollege?.trim() || undefined,
+        typeOfLicense: values.typeOfLicense || undefined,
+        validityOfLicense: values.validityOfLicense
+          ? dayjs(values.validityOfLicense).format("YYYY-MM-DD")
+          : undefined,
+        highestQualificationCategory:
+          values.highestQualificationCategory || undefined,
+        highestQualificationSubCategory:
+          values.highestQualificationSubCategory || undefined,
+        otherHighestQualification:
+          values.otherHighestQualification?.trim() || undefined,
+        countryOfCitizenship: values.countryOfCitizenship || undefined,
+        haveWorkPermit: values.haveWorkPermit || undefined,
+        haveValidPassport: values.haveValidPassport || undefined,
+        validityOfPassport: values.validityOfPassport
+          ? dayjs(values.validityOfPassport).format("YYYY-MM-DD")
+          : undefined,
+        documentsAttach: values.documentsAttach || undefined,
+        resumeFile: values.resumeFile || undefined,
+        certificates: values.certificates.length
+          ? values.certificates
+          : undefined,
+        preferredJobTitlesList: values.preferredJobTitlesList.length
+          ? JSON.stringify(values.preferredJobTitlesList)
+          : undefined,
         preferredLocationList: values.preferredLocationList.length
           ? JSON.stringify(values.preferredLocationList)
           : undefined,
+        minimumSalaryExpectation:
+          values.minimumSalaryExpectation?.trim() || undefined,
+        maximumSalaryExpectation:
+          values.maximumSalaryExpectation?.trim() || undefined,
         profileSummary: values.profileSummary?.trim() || undefined,
       });
 
@@ -358,7 +395,11 @@ export function InterestFlowProvider({
                 .
               </Typography>
 
-              <ProfileForm />
+              <ProfileForm
+                uploadedDocument={profileUser?.documentAttachList?.[0]}
+                uploadedResume={profileUser?.resume || null}
+                uploadedCertificates={profileUser?.certificateList || []}
+              />
             </DialogContent>
 
             <DialogActions

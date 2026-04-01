@@ -22,7 +22,7 @@ export default function HowCIIWorks() {
         {/* Industry-Led Functional Model */}
         <div className="flex flex-col gap-6">
           <h3 className="text-lg font-semibold text-content-primary font-poppins">Industry-Led Functional Model</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 px-20">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:px-20 px-0">
             {functionalModelCards.map(({ Icon, title, lines }) => (
               <div
                 key={title}

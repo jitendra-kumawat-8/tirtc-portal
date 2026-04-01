@@ -50,7 +50,7 @@ export async function updateProfile(
   const fileKeys: Array<keyof UpdateProfileRequest> = [
     "resumeFile",
     "certificates",
-    "documentAttach",
+    "documentsAttach",
   ];
 
   (Object.keys(data) as Array<keyof UpdateProfileRequest>).forEach((key) => {

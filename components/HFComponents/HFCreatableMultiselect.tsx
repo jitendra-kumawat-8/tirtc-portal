@@ -59,6 +59,7 @@ const HFCreatableMultiselect: React.FC<HFCreatableMultiselectProps> = ({
               label={typeof option === "string" ? option : option.label}
               {...getTagProps({ index })}
               className="bg-[#F3F4F6] text-[#374151]"
+              key={index as unknown as number}
             />
           ))
         }

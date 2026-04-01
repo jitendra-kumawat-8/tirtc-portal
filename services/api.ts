@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Base URL — override via NEXT_PUBLIC_API_URL in .env.local
 const BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://13.126.3.220:93/api";
+  process.env.NEXT_PUBLIC_API_URL || "https://admin.tirtc-cii.in/api";
 
 const apiClient = axios.create({
   baseURL: BASE_URL,

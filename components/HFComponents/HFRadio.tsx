@@ -51,6 +51,7 @@ const HFRadio: React.FC<HFRadioProps> = ({
           <RadioGroup {...field} row>
             {options.map((option) => (
               <FormControlLabel
+                key={option.value as string}
                 value={option.value}
                 control={<Radio />}
                 label={option.label}

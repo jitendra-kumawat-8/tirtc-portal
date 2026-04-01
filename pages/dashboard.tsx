@@ -112,7 +112,7 @@ export default function Dashboard() {
               Welcome back, {user?.fullName || "User"}!
             </Typography>
             <Typography variant="body1" color="text.secondary">
-              Here's what's happening with your projects today.
+              Here&apos;s what&apos;s happening with your projects today.
             </Typography>
           </Box>
 
