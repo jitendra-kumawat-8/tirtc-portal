@@ -13,7 +13,7 @@ function PrevArrow({ onClick }: { onClick?: () => void }) {
     <button
       type="button"
       onClick={onClick}
-      className="slick-custom-arrow flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center btn-transition absolute -left-5 top-1/2 -translate-y-1/2 z-10"
+      className="slick-custom-arrow flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center btn-transition absolute -left-12 top-1/2 -translate-y-1/2 z-10 sm:-left-14"
       style={{
         border: "1.5px solid rgba(29,78,216,0.2)",
         color: "#1D4ED8",
@@ -32,7 +32,7 @@ function NextArrow({ onClick }: { onClick?: () => void }) {
     <button
       type="button"
       onClick={onClick}
-      className="slick-custom-arrow flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center btn-transition absolute -right-5 top-1/2 -translate-y-1/2 z-10"
+      className="slick-custom-arrow flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center btn-transition absolute -right-12 top-1/2 -translate-y-1/2 z-10 sm:-right-14"
       style={{
         border: "1.5px solid rgba(29,78,216,0.2)",
         color: "#1D4ED8",
@@ -71,7 +71,7 @@ export default function CorePillars() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-20 flex flex-col gap-10 md:gap-12">
         <h2 className="section-heading">Core Pillars</h2>
 
-        <div className="relative overflow-hidden sm:overflow-visible sm:px-6 tirtc-slick-equal-height">
+        <div className="relative overflow-hidden sm:overflow-visible sm:px-12 md:px-14 tirtc-slick-equal-height">
           <style>{`
             .tirtc-dots { margin-top: 20px !important; }
             .tirtc-dots li button:before {

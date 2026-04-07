@@ -38,10 +38,10 @@ export function FeaturedDomainCard({ card }: { card: DomainCard }) {
         />
       </div>
       <div className="flex flex-col gap-2 p-5 flex-1 min-h-0">
-        <h3 className="text-sm font-semibold text-content-primary font-poppins leading-snug">{card.title}</h3>
-        <p className="text-xs leading-relaxed text-content-secondary">{card.summary}</p>
+        <h3 className="text-base font-semibold text-content-primary font-poppins leading-snug">{card.title}</h3>
+        <p className="text-xs font-semibold leading-relaxed text-black">{card.summary}</p>
         <p
-          className="text-[11px] leading-relaxed text-content-muted flex-1"
+          className="text-[11px] leading-relaxed text-black flex-1"
           style={{
             display: "-webkit-box",
             WebkitLineClamp: 4,

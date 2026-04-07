@@ -25,17 +25,27 @@ export default function CoursesPage() {
         {/* Top bar */}
         <nav className="sticky top-0 z-50 bg-white/[0.94] backdrop-blur-lg border-b border-primary-900/[0.07]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-20 flex items-center justify-between h-[68px]">
-            <Link href="/" className="flex items-center gap-3 flex-shrink-0">
+
+            <Link href="/" className="flex h-12 w-24 items-center justify-center sm:w-28">
               <Image
                 src="/logo/TIRTC LOGOS.png"
                 alt="TIRTC"
-                width={96}
-                height={44}
-                style={{ objectFit: "contain", objectPosition: "left" }}
-
+                width={70}
+                height={70}
+                className="max-h-12 w-auto object-contain"
               />
             </Link>
-            <div className="flex items-center gap-2">
+            <Link href="/" className="flex h-12 w-24 items-center justify-center sm:w-28">
+              <Image
+                src="/logo/CII.png"
+                alt="CII"
+                width={120}
+                height={52}
+                className="max-h-11 w-auto object-contain"
+              />
+            </Link>
+
+            <div className="hidden sm:flex  items-center gap-2">
               <Link
                 href="/"
                 className="hidden sm:inline-block px-4 py-2 text-sm font-medium text-content-secondary hover:text-primary-700 rounded-full hover:bg-primary-700/[0.06] btn-transition"
@@ -61,7 +71,7 @@ export default function CoursesPage() {
           <h1 className="text-3xl md:text-4xl font-bold text-content-primary font-poppins tracking-tight leading-tight">
             Skill up with industry-aligned programmes
           </h1>
-          <p className="text-base max-w-xl" style={{ color: "#475569" }}>
+          <p className="text-base " style={{ color: "#475569" }}>
             Hands-on, outcome-focused training across sectors — built for real-world employability.
           </p>
           {/* <span className="text-xs font-medium" style={{ color: "#94A3B8" }}>

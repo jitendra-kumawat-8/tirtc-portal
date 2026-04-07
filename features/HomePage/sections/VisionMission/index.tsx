@@ -23,9 +23,7 @@ export default function VisionMission() {
       <div className="mx-auto flex flex-col gap-10 ">
         <div className="flex flex-col gap-4 text-center">
           <h2 className="section-heading">Vision &amp; Mission</h2>
-          <p className="mx-auto max-w-3xl section-subtitle leading-relaxed text-content-secondary">
-            A premier institution at the intersection of telecom technology and business.
-          </p>
+
         </div>
 
         <div className="flex flex-col gap-0">

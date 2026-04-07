@@ -19,15 +19,26 @@ export default function JobsPage() {
       <div className="min-h-screen" style={{ background: BG_TINTED_2 }}>
         <nav className="sticky top-0 z-50 border-b border-primary-900/[0.07] bg-white/[0.94] backdrop-blur-lg">
           <div className="mx-auto flex h-[68px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-20">
-            <Link href="/" className="flex flex-shrink-0 items-center gap-3">
+
+            <Link href="/" className="flex h-12 w-24 items-center justify-center sm:w-28">
               <Image
                 src="/logo/TIRTC LOGOS.png"
                 alt="TIRTC"
-                width={96}
-                height={44}
-                style={{ objectFit: "contain", objectPosition: "left" }}
+                width={70}
+                height={70}
+                className="max-h-12 w-auto object-contain"
               />
             </Link>
+            <Link href="/" className="flex h-12 w-24 items-center justify-center sm:w-28">
+              <Image
+                src="/logo/CII.png"
+                alt="CII"
+                width={120}
+                height={52}
+                className="max-h-11 w-auto object-contain"
+              />
+            </Link>
+
             <Link
               href="/"
               className="btn-transition hidden rounded-full px-4 py-2 text-sm font-medium text-content-secondary hover:bg-primary-700/[0.06] hover:text-primary-700 sm:inline-block"
@@ -37,7 +48,7 @@ export default function JobsPage() {
           </div>
         </nav>
 
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 pb-16 pt-16 sm:px-6 lg:px-20">
+        <div className="mx-auto flex flex-col gap-4 px-4 pb-16 pt-16 sm:px-6 lg:px-20">
           <span className="text-sm font-bold uppercase tracking-[0.16em] text-primary-700">
             Featured Jobs
           </span>
