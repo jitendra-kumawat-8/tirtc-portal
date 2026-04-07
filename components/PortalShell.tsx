@@ -19,6 +19,7 @@ interface PortalShellProps {
   heading: string;
   description: string;
   children: ReactNode;
+  showApplyCta?: boolean;
 }
 
 export default function PortalShell({
@@ -27,6 +28,7 @@ export default function PortalShell({
   heading,
   description,
   children,
+  showApplyCta = true,
 }: PortalShellProps) {
   return (
     <>
@@ -83,9 +85,11 @@ export default function PortalShell({
                 </Box>
               </Stack>
 
-              <Button component={Link} href="/apply" variant="contained">
-                Apply Now
-              </Button>
+              {showApplyCta ? (
+                <Button component={Link} href="/apply" variant="contained">
+                  Apply Now
+                </Button>
+              ) : null}
             </Container>
           </Toolbar>
         </AppBar>

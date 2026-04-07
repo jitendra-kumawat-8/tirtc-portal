@@ -1,9 +1,7 @@
 export const aboutPoints = [
-  "An industry-led telecom training centre to build a future-ready telecom workforce",
-  "Focused on skilling, reskilling and upskilling youth in telecom and digital infrastructure domains",
-  "To deliver job-oriented, hands-on training aligned to real industry requirements",
-  "Equipped with technology-enabled labs and simulation-based learning environments",
-  "Blended training model: Institute Training – 30%; In-Industry Training – 70%",
-  "Industry-aligned curriculum, certification and placement linkages",
-  "To integrate industry participation across training, labs, apprenticeships & hiring",
+  "The Indian telecom industry, contributing 6.5% to GDP, is rapidly transforming with 5G, IoT, AI and cloud technologies.",
+  "Key roles across network engineering, cybersecurity, data analytics, cloud operations, automation and fiber-optic technologies are seeing strong demand.",
+  "This transition is expected to create a skill gap of nearly 2.5 million professionals by 2030.",
+  "TIRTC is designed as an industry-led hub for telecom R&D, innovation, skilling and employment.",
+  "The centre directly links training with employability outcomes to build a continuous pipeline of industry-ready talent.",
 ];

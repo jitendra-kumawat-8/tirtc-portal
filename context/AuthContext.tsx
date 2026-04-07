@@ -1,6 +1,13 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { useMutation } from "@tanstack/react-query";
 import { enqueueSnackbar } from "notistack";
+import { isUnauthorizedError } from "../services/api";
 import { register, login, getProfile, updateProfile } from "../services/authService";
 import type {
   UserProfile,
@@ -22,6 +29,8 @@ interface AuthCtx {
   loginUser: (vars: LoginRequest & { rememberMe?: boolean }, onSuccess?: () => void) => void;
   logout: () => void;
   refetchUser: () => Promise<void>;
+  /** Update cached user + storage from a profile already returned by the API (avoids a duplicate getProfile). */
+  syncUserProfile: (profile: UserProfile) => void;
   updateUserProfile: (vars: UpdateProfileRequest) => Promise<void>;
 }
 
@@ -162,12 +171,26 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         ? localStorage
         : sessionStorage;
       currentStorage.setItem(LS_USER, JSON.stringify(profile));
-    } catch {
+    } catch (error: unknown) {
+      if (isUnauthorizedError(error)) {
+        setUser(null);
+        setAccessToken(null);
+        return;
+      }
       logout();
     } finally {
       setIsLoading(false);
     }
   };
+
+  const syncUserProfile = useCallback((profile: UserProfile) => {
+    setUser(profile);
+    if (typeof window === "undefined") return;
+    const currentStorage = localStorage.getItem(LS_USER)
+      ? localStorage
+      : sessionStorage;
+    currentStorage.setItem(LS_USER, JSON.stringify(profile));
+  }, []);
 
   // ── Update profile ───────────────────────────────────────────────────────
 
@@ -182,9 +205,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       enqueueSnackbar("Profile updated successfully!", { variant: "success" });
       // Refresh local user state
       await refetchUser();
-    } catch (error: any) {
+    } catch (error: unknown) {
+      if (isUnauthorizedError(error)) {
+        return;
+      }
       enqueueSnackbar(
-        error?.message || "Profile update failed, please try again.",
+        error instanceof Error
+          ? error.message
+          : "Profile update failed, please try again.",
         { variant: "error" }
       );
     } finally {
@@ -213,6 +241,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     },
     logout,
     refetchUser,
+    syncUserProfile,
     updateUserProfile,
   };
 

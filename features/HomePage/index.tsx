@@ -1,42 +1,21 @@
 import Head from "next/head";
-import { FormEvent, useState } from "react";
-import { useSnackbar } from "notistack";
-import type { InterestForm } from "./types";
 
 import Navbar from "./sections/Navbar";
 import Hero from "./sections/Hero";
 import About from "./sections/About";
 import VisionMission from "./sections/VisionMission";
-import Background from "./sections/ProblemSolution";
 import Objective from "./sections/Objective";
+import Background from "./sections/ProblemSolution";
 import Courses from "./sections/Courses";
 import HowCIIWorks from "./sections/HowCIIWorks";
 import Partners from "./sections/Partners";
-import Leadership from "./sections/Leadership";
-import CTASection from "./sections/CTASection";
 import Footer from "./sections/Footer";
-import InterestDialog from "./sections/InterestDialog";
+import Governance from "./sections/Governance";
+import CorePillars from "./sections/CorePillars";
 
 export default function HomePage() {
-  const { enqueueSnackbar } = useSnackbar();
-  const [interestOpen, setInterestOpen] = useState(false);
-  const [interestForm, setInterestForm] = useState<InterestForm>({
-    name: "", email: "", phone: "", interestType: "Student",
-  });
-
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
-  const handleInterestSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (Object.values(interestForm).some((v) => !v.trim())) {
-      enqueueSnackbar("Please complete all fields before submitting.", { variant: "warning" });
-      return;
-    }
-    enqueueSnackbar("Interest captured. The admissions team will follow up shortly.", { variant: "success" });
-    setInterestOpen(false);
-    setInterestForm({ name: "", email: "", phone: "", interestType: "Student" });
   };
 
   return (
@@ -63,10 +42,7 @@ export default function HomePage() {
         .hero-title { animation: fadeUp 0.6s ease-out 0.1s both; }
         .hero-sub   { animation: fadeUp 0.6s ease-out 0.2s both; }
         .hero-body  { animation: fadeUp 0.6s ease-out 0.3s both; }
-        .hero-ctas  { animation: fadeUp 0.6s ease-out 0.4s both; }
         .hero-card  { animation: fadeIn 0.8s ease-out 0.3s both; }
-        .stat-card  { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-        .stat-card:hover { transform: scale(1.04); box-shadow: 0 8px 24px rgba(30,58,138,0.18); }
         .nav-link       { transition: color 0.15s ease; }
         .btn-transition { transition: all 0.2s ease; }
         .obj-card {
@@ -102,26 +78,18 @@ export default function HomePage() {
 
       <div className="bg-background-primary text-content-primary">
         <Navbar scrollToSection={scrollToSection} />
-        <Hero onShowInterest={() => setInterestOpen(true)} />
+        <Hero />
         <About />
         <VisionMission />
-        <Background />
         <Objective />
+        {/* <Background /> */}
+        <CorePillars />
+        <Governance />
         <Courses />
-        <HowCIIWorks />
+        {/* <HowCIIWorks /> */}
         <Partners />
-        <Leadership />
-        <CTASection />
         <Footer />
       </div>
-
-      <InterestDialog
-        open={interestOpen}
-        onClose={() => setInterestOpen(false)}
-        form={interestForm}
-        setForm={setInterestForm}
-        onSubmit={handleInterestSubmit}
-      />
     </>
   );
 }

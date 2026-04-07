@@ -17,6 +17,7 @@ import ProfileForm, {
   ProfileFormValues,
 } from "../components/Profile/ProfileForm";
 import { useAuth } from "../context/AuthContext";
+import { isUnauthorizedError } from "../services/api";
 import { getProfile } from "../services/authService";
 import type { UserProfile } from "../types/api";
 import {
@@ -121,11 +122,13 @@ export default function ProfilePage() {
         setProfileUser(profile);
         reset(mapProfileToFormValues(profile));
         setPageReady(true);
-      } catch (error) {
-        if (!cancelled) {
-          console.error("Failed to load profile:", error);
-          void router.replace("/login");
+      } catch (error: unknown) {
+        if (cancelled) return;
+        if (isUnauthorizedError(error)) {
+          return;
         }
+        console.error("Failed to load profile:", error);
+        void router.replace("/login");
       }
     };
 

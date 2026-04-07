@@ -1,5 +1,5 @@
 /** Stable DOM id for scroll + interest flow (URL hash safe) */
-export function makeInterestId(kind: "course" | "training" | "job", title: string): string {
+export function makeInterestId(kind: "course" | "training" | "job" | "domain", title: string): string {
   const slug = title
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")

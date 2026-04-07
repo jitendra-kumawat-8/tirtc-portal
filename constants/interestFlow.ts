@@ -4,6 +4,9 @@ export type PendingInterestPayload = {
   id: string;
   title: string;
   returnPath: string;
+  /** Numeric id as string — sent to POST /applyforjob */
+  jobId?: string;
+  jobType?: "JOB" | "TRAINING";
 };
 
 export function readPendingInterest(): PendingInterestPayload | null {

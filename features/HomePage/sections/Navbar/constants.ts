@@ -1,11 +1,12 @@
-/** Header nav — order and labels match site IA; `home` scrolls to top / goes to `/` */
+/** Header nav — matches sections rendered on `HomePage` (`home` = top / `/`) */
 export const navItems = [
   { label: "Home", href: "home" },
   { label: "About TIRTC", href: "about" },
   { label: "Vision & Mission", href: "vision" },
   { label: "Objective", href: "objective" },
+  // { label: "Background", href: "background" },
+  { label: "Core Pillars", href: "core-pillars" },
+  { label: "Governance", href: "governance" },
   { label: "Courses", href: "courses" },
-  { label: "How We Work?", href: "how-cii-works" },
   { label: "Industry Partners", href: "partners" },
-  { label: "Contact Us", href: "contact" },
 ] as const;

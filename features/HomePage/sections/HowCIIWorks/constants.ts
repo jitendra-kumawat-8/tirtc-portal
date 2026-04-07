@@ -1,10 +1,15 @@
 import type { ComponentType } from "react";
 import type { SvgIconProps } from "@mui/material";
 import {
-  DomainRounded,
+  CastForEducationRounded,
   ConstructionRounded,
-  HandshakeRounded,
+  DomainRounded,
   GroupsRounded,
+  HandshakeRounded,
+  LanguageRounded,
+  MenuBookRounded,
+  SupportAgentRounded,
+  WorkspacePremiumRounded,
 } from "@mui/icons-material";
 
 export const functionalModelCards: Array<{
@@ -54,25 +59,35 @@ export const frameworkChips = [
   "Placement Facilitation",
 ];
 
-export const deliveryVehicles: Array<{ title: string; description: string }> = [
+/** CII Skill Delivery Vehicles — wheel + supporting copy (5 nodes) */
+export const deliveryVehicles: Array<{
+  title: string;
+  description: string;
+  Icon: ComponentType<SvgIconProps>;
+}> = [
   {
     title: "CII Multi Skill Training Institutes (MSTIs)",
     description: "Delivering hands-on, job-oriented training",
+    Icon: CastForEducationRounded,
   },
   {
     title: "CII Model Career Centres",
-    description: "Enabling career counselling, job matching & placement support",
+    description: "Career counselling, job matching & placement support",
+    Icon: SupportAgentRounded,
   },
   {
     title: "Awarding Body",
-    description: "Enabling NSQF-aligned training and certification",
+    description: "NSQF-aligned training and certification",
+    Icon: WorkspacePremiumRounded,
   },
   {
     title: "Industry-Led Courses",
-    description: "Covering telecom, tech and digital literacy",
+    description: "Telecom, tech and digital literacy",
+    Icon: MenuBookRounded,
   },
   {
     title: "International Pathways",
-    description: "With language, mobility & global career readiness support",
+    description: "Language, mobility & global career readiness",
+    Icon: LanguageRounded,
   },
 ];

@@ -4,6 +4,7 @@ import React, {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import { useRouter } from "next/router";
@@ -27,7 +28,8 @@ import {
   readPendingInterest,
   writePendingInterest,
 } from "../constants/interestFlow";
-import { getProfile, updateProfile } from "../services/authService";
+import { isUnauthorizedError } from "../services/api";
+import { applyForJob, getProfile, updateProfile } from "../services/authService";
 import { isProfileComplete } from "../utils/profileComplete";
 import {
   PROFILE_FORM_DEFAULTS,
@@ -36,7 +38,13 @@ import {
 import { profileFormSchema } from "../utils/profileFormSchema";
 import type { UserProfile } from "../types/api";
 
-type InterestTarget = { id: string; title: string };
+export type InterestTarget = {
+  id: string;
+  title: string;
+  /** Sent as POST /applyforjob `jobId` (string) when present with jobType */
+  jobId?: string;
+  jobType?: "JOB" | "TRAINING";
+};
 
 type InterestFlowCtx = {
   runShowInterest: (target: InterestTarget) => void;
@@ -87,8 +95,14 @@ export function InterestFlowProvider({
   children: React.ReactNode;
 }) {
   const router = useRouter();
-  const { isAuthenticated, isAuthReady, accessToken, user, refetchUser } =
-    useAuth();
+  const {
+    isAuthenticated,
+    isAuthReady,
+    accessToken,
+    user,
+    refetchUser,
+    syncUserProfile,
+  } = useAuth();
 
   const methods = useForm<ProfileFormValues>({
     defaultValues: PROFILE_FORM_DEFAULTS,
@@ -102,6 +116,35 @@ export function InterestFlowProvider({
   const [interestTitle, setInterestTitle] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [profileUser, setProfileUser] = useState<UserProfile | null>(null);
+  /** Latest interest target (job/domain) for apply API after profile save */
+  const interestTargetRef = useRef<InterestTarget | null>(null);
+
+  const recordApplyForJob = useCallback(
+    async (target: InterestTarget): Promise<boolean> => {
+      if (!target.jobId || !target.jobType) return true;
+      try {
+        const res = await applyForJob({
+          jobId: target.jobId,
+          jobType: target.jobType,
+        });
+        if (!res?.status) {
+          enqueueSnackbar(res?.msg || "Could not record interest.", {
+            variant: "error",
+          });
+          return false;
+        }
+        return true;
+      } catch (error: unknown) {
+        if (isUnauthorizedError(error)) return false;
+        console.error("applyForJob failed:", error);
+        enqueueSnackbar("Could not record interest. Please try again.", {
+          variant: "error",
+        });
+        return false;
+      }
+    },
+    []
+  );
 
   const openProfileModal = useCallback(
     (profile: UserProfile, title: string) => {
@@ -121,7 +164,7 @@ export function InterestFlowProvider({
   }, [reset, submitting]);
 
   const finalizeInterestCheck = useCallback(
-    async (title: string) => {
+    async (target: InterestTarget) => {
       if (!accessToken) return;
 
       try {
@@ -135,34 +178,45 @@ export function InterestFlowProvider({
         }
 
         setProfileUser(profile);
-        await refetchUser();
+        syncUserProfile(profile);
 
         if (isProfileComplete(profile)) {
-          enqueueSnackbar("Interest captured successfully", {
-            variant: "success",
-          });
+          const ok = await recordApplyForJob(target);
+          if (ok) {
+            enqueueSnackbar("Interest captured successfully", {
+              variant: "success",
+            });
+          }
           return;
         }
 
-        openProfileModal(profile, title);
-      } catch (error) {
+        openProfileModal(profile, target.title);
+      } catch (error: unknown) {
+        if (isUnauthorizedError(error)) {
+          return;
+        }
         console.error("Could not verify profile:", error);
         enqueueSnackbar("Could not verify your profile. Please try again.", {
           variant: "error",
         });
       }
     },
-    [accessToken, refetchUser, openProfileModal]
+    [accessToken, syncUserProfile, openProfileModal, recordApplyForJob]
   );
 
   const runShowInterest = useCallback(
     (target: InterestTarget) => {
+      interestTargetRef.current = target;
+
       if (!isAuthenticated) {
         if (typeof window !== "undefined") {
           writePendingInterest({
             id: target.id,
             title: target.title,
             returnPath: window.location.pathname + window.location.search,
+            ...(target.jobId && target.jobType
+              ? { jobId: target.jobId, jobType: target.jobType }
+              : {}),
           });
         }
 
@@ -170,7 +224,7 @@ export function InterestFlowProvider({
         return;
       }
 
-      void finalizeInterestCheck(target.title);
+      void finalizeInterestCheck(target);
     },
     [isAuthenticated, router, finalizeInterestCheck]
   );
@@ -199,7 +253,12 @@ export function InterestFlowProvider({
 
     const t = window.setTimeout(() => {
       clearPendingInterest();
-      void finalizeInterestCheck(pending.title);
+      void finalizeInterestCheck({
+        id: pending.id,
+        title: pending.title,
+        jobId: pending.jobId,
+        jobType: pending.jobType,
+      });
     }, 450);
 
     return () => window.clearTimeout(t);
@@ -296,15 +355,27 @@ export function InterestFlowProvider({
         return;
       }
 
+      const applyTarget = interestTargetRef.current;
+      let applyOk = true;
+      if (applyTarget?.jobId && applyTarget?.jobType) {
+        applyOk = await recordApplyForJob(applyTarget);
+      }
+
       await refetchUser();
       setModalOpen(false);
       setProfileUser(null);
       reset(PROFILE_FORM_DEFAULTS);
+      interestTargetRef.current = null;
 
-      enqueueSnackbar("Interest captured successfully", {
-        variant: "success",
-      });
-    } catch (error) {
+      if (applyOk) {
+        enqueueSnackbar("Interest captured successfully", {
+          variant: "success",
+        });
+      }
+    } catch (error: unknown) {
+      if (isUnauthorizedError(error)) {
+        return;
+      }
       console.error("Could not save profile:", error);
       enqueueSnackbar("Could not save profile. Please try again.", {
         variant: "error",

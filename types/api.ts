@@ -182,6 +182,16 @@ export interface UpdateProfileRequest {
 
 export interface UpdateProfileResponse extends ApiEnvelope {}
 
+// ── Apply for job / training interest ────────────────────────────────────────
+
+/** POST /api/applyforjob — requires Bearer token */
+export interface ApplyForJobRequest {
+  jobId: string;
+  jobType: "JOB" | "TRAINING";
+}
+
+export interface ApplyForJobResponse extends ApiEnvelope {}
+
 export interface OptionItem {
   value: string;
   text: string;

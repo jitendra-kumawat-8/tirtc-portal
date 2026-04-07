@@ -7,6 +7,8 @@ import type {
   GetProfileResponse,
   UpdateProfileRequest,
   UpdateProfileResponse,
+  ApplyForJobRequest,
+  ApplyForJobResponse,
 } from "../types/api";
 
 // ---------------------------------------------------------------------------
@@ -74,5 +76,15 @@ export async function updateProfile(
     formData,
     { headers: { "Content-Type": "multipart/form-data" } }
   );
+  return response.data;
+}
+
+// ---------------------------------------------------------------------------
+// POST /api/applyforjob — JSON body, requires Bearer token
+// ---------------------------------------------------------------------------
+export async function applyForJob(
+  data: ApplyForJobRequest
+): Promise<ApplyForJobResponse> {
+  const response = await apiClient.post<ApplyForJobResponse>("/applyjob", data);
   return response.data;
 }

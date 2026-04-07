@@ -1,17 +1,12 @@
 import { objectives } from "./constants";
-import { BG_TINTED_2 } from "../../backgrounds";
 
 export default function Objective() {
   return (
-    <section
-      id="objective"
-      className="scroll-mt-24 relative overflow-hidden"
-      style={{ background: BG_TINTED_2 }}
-    >
+    <section id="objective" className="scroll-mt-24 relative overflow-hidden bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-20 py-20 md:py-28">
         <div className="flex flex-col gap-10">
 
-          <span className="text-sm font-bold uppercase tracking-[0.16em] text-primary-700">
+          <span className="section-heading">
             Objective
           </span>
 

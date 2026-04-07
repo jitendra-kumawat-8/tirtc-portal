@@ -4,6 +4,8 @@ import Link from "next/link";
 import { ArrowForwardRounded } from "@mui/icons-material";
 import { courses } from "./constants";
 import { BG_TINTED_2 } from "../HomePage/backgrounds";
+import { featuredDomainCards } from "../HomePage/sections/Courses/constants";
+import { FeaturedDomainCard } from "../HomePage/sections/Courses/FeaturedDomainCard";
 import { useInterestFlow } from "../../context/InterestFlowContext";
 import { makeInterestId } from "../../utils/interestId";
 
@@ -40,13 +42,13 @@ export default function CoursesPage() {
               >
                 ← Back to Home
               </Link>
-              <div className="w-px h-5 bg-gray-200 hidden sm:block" />
-              <Link
+              {/* <div className="w-px h-5 bg-gray-200 hidden sm:block" /> */}
+              {/* <Link
                 href="/apply"
                 className="btn-transition px-5 py-2 text-sm font-semibold bg-primary-700 text-white rounded-full hover:bg-primary-900 shadow-sm"
               >
                 Apply Now
-              </Link>
+              </Link> */}
             </div>
           </div>
         </nav>
@@ -62,22 +64,41 @@ export default function CoursesPage() {
           <p className="text-base max-w-xl" style={{ color: "#475569" }}>
             Hands-on, outcome-focused training across sectors — built for real-world employability.
           </p>
-          <span className="text-xs font-medium" style={{ color: "#94A3B8" }}>
+          {/* <span className="text-xs font-medium" style={{ color: "#94A3B8" }}>
             {courses.length} programmes available
-          </span>
+          </span> */}
         </div>
 
-        {/* Cards grid */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-20 pb-24">
+        {/* Key domains — same themes as home */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-20 pb-12 flex flex-col gap-6">
+          <div className="flex flex-col gap-2">
+            <span className="text-sm font-bold uppercase tracking-[0.16em] text-primary-700">
+              Key domains
+            </span>
+            <p className="text-base " style={{ color: "#475569" }}>
+              Training themes aligned to NSQF and industry standards — explore what each domain covers, then
+              browse the full programme catalogue below.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            {featuredDomainCards.map((card) => (
+              <FeaturedDomainCard key={card.id} card={card} />
+            ))}
+          </div>
+        </div>
+
+        {/* All programmes grid */}
+        {/* <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-20 pb-24 flex flex-col gap-6">
+          <h2 className="text-lg font-semibold text-content-primary font-poppins">All programmes</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {courses.map((course) => (
               <CourseCard key={course.title} {...course} />
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Footer strip */}
-        <div
+        {/* <div
           className="border-t py-8"
           style={{ borderColor: "rgba(29,78,216,0.1)", background: "rgba(255,255,255,0.6)" }}
         >
@@ -95,7 +116,7 @@ export default function CoursesPage() {
               Apply Now <ArrowForwardRounded fontSize="small" />
             </Link>
           </div>
-        </div>
+        </div> */}
 
       </div>
     </>
