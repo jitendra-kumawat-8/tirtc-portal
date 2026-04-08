@@ -146,15 +146,24 @@ export default function RegisterPage() {
           ].join(", "),
         }}
       >
-        {/* Top bar */}
-        <header className="px-6 py-4 flex items-center">
-          <Link href="/" className="flex items-center gap-3">
+        {/* Top bar — partner logos (aligned with site navbar) */}
+        <header className="flex items-center justify-evenly gap-8 px-4 py-4 sm:gap-12 sm:px-6">
+          <Link href="/" className="flex shrink-0 items-center justify-center">
             <Image
               src="/logo/TIRTC LOGOS.png"
               alt="TIRTC"
-              width={88}
-              height={40}
-              style={{ objectFit: "contain", objectPosition: "left" }}
+              width={110}
+              height={100}
+              className="h-11 w-auto object-contain object-center sm:h-14"
+            />
+          </Link>
+          <Link href="/" className="flex shrink-0 items-center justify-center">
+            <Image
+              src="/logo/CII.png"
+              alt="CII"
+              width={206}
+              height={90}
+              className="h-11 w-auto max-w-[13rem] object-contain object-center sm:h-14 sm:max-w-none"
             />
           </Link>
         </header>

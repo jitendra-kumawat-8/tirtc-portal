@@ -84,7 +84,7 @@ export default function Courses() {
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between gap-y-2">
             <div className="flex flex-col gap-2">
-              <h3 className="section-subheading">Trainings</h3>
+              <h3 className="section-subheading">Training</h3>
             </div>
             <Link
               href="/courses"
@@ -125,10 +125,9 @@ export default function Courses() {
             <h3 className="section-subheading">
               Sector-specific Technology Training
             </h3>
-            {/* <p className="section-description">
-              delivered through specialised labs with hands-on,
-              simulation-based learning aligned with NSQF and industry standards.
-            </p> */}
+            <p className="section-description">
+              Delivered through specialised labs with <strong>hands-on, simulation-based learning aligned with NSQF and industry standards.</strong>
+            </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {courseCards.map((course) => (

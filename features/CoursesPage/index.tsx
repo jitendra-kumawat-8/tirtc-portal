@@ -85,10 +85,10 @@ export default function CoursesPage() {
             <span className="text-sm font-bold uppercase tracking-[0.16em] text-primary-700">
               Key domains
             </span>
-            <p className="text-base " style={{ color: "#475569" }}>
+            {/* <p className="text-base " style={{ color: "#475569" }}>
               Training themes aligned to NSQF and industry standards — explore what each domain covers, then
               browse the full programme catalogue below.
-            </p>
+            </p> */}
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {featuredDomainCards.map((card) => (

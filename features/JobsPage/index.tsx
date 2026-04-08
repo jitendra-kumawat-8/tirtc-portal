@@ -55,7 +55,7 @@ export default function JobsPage() {
           <h1 className="font-poppins text-3xl font-bold leading-tight tracking-tight text-content-primary md:text-4xl">
             Roles aligned with TIRTC skilling tracks
           </h1>
-          <p className="max-w-2xl text-base text-content-secondary">
+          <p className="text-base text-content-secondary">
             Representative openings for quick scanning — role-first details alongside our training
             programmes. Use <strong className="font-semibold text-content-primary">Show Interest</strong>{" "}
             on any role to register your interest with TIRTC.
